@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>屏東活動年曆</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #FFF6F6;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #FF9AA2;
+    }
+    .slider-container {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    input[type=range] {
+      width: 60%;
+    }
+    .event-card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .event-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .event-card h2 {
+      color: #FFB7B2;
+    }
+    .event-card p {
+      margin: 1rem 0;
+    }
+    .event-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #FFDAC1;
+      color: #333;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .event-card a:hover {
+      background: #FFB7B2;
+    }
+  </style>
+</head>
+<body>
+  <h1>屏東活動年曆</h1>
+  <div class="slider-container">
+    <label for="monthSlider">選擇月份：</label>
+    <input type="range" id="monthSlider" min="1" max="12" value="1" />
+    <span id="monthLabel">1 月</span>
+  </div>
+  <div class="event-card" id="eventCard">
+    <!-- 活動資訊將由 JavaScript 插入 -->
+  </div>
+
+  <script>
+    const events = [
+      {
+        month: 1,
+        name: "屏東燈會",
+        description: "每年農曆新年期間，屏東市區舉辦燈會，展示各式花燈與表演活動。",
+        link: "https://www.amazing-pingtung.com/ptlf",
+        image: "https://cdn-smiletaiwan.cw.com.tw/article/202401/article-65a105e896b7c.jpg"
+      },
+      {
+        month: 2,
+        name: "大鵬灣熱氣球嘉年華",
+        description: "在屏東縣舉行的熱氣球活動，吸引眾多遊客參與。",
+        link: "https://www.xinmedia.com/article/9393",
+        image: "https://icrvb3jy.xinmedia.com/solomo/article/A/A/1/AA14B321-8084-4F4C-BB09-DDDE098DF9C1.jpg"
+      },
+      {
+        month: 3,
+        name: "北野祭",
+        description: "屏東北野祭，一場結合公路旅行、音樂藝術與永續精神的春日盛會，讓我們一同進入北野，在微醺的音樂與營火簇擁中，探索屏北的純粹自由。遠眺中央山脈，依偎荖濃溪畔，期待與你相聚，開啟三天兩夜的美好旅程！",
+        link: "https://www.facebook.com/ppfestival/?locale=zh_TW",
+        image: "https://scontent.ftpe7-4.fna.fbcdn.net/v/t39.30808-6/480178226_122212454744225176_3029459447197196262_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=h7x_JGBOM1wQ7kNvwGHol_b&_nc_oc=AdnBl09DeuYTfV-gqHf3XikLj6utfTmNpUflavZ5hfip0DIbYSHf7LYKcMulTauVEV6_pa548TD5TRCgK9_FnixQ&_nc_zt=23&_nc_ht=scontent.ftpe7-4.fna&_nc_gid=qfZCraY9FnKTsrzHT7l3nw&oh=00_AfIMfhZn8mBY39mbfTsfvZx-vEaWTbG0Z9VMxE8GZcwbGQ&oe=6842DE56"
+      },
+      {
+        month: 4,
+        name: "三大日音樂節",
+        description: "屏東三大日音樂節，由屏東縣政府於每年4月在屏東縣立體育館旁草地舉辦的大型演唱會。此活動於2018年起舉辦，「三大日」代表：第一是「春」天的春字，第二「大日」台語表示「好日子」的意思，第三是連續辦理三天。",
+        link: "https://www.amazing-pingtung.com/ptsmf",
+        image: "https://static.wixstatic.com/media/66b10b_83055949a9f544b5b30d79e633bdc189~mv2.jpg/v1/fill/w_640,h_924,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/250220%E4%B8%89%E5%A4%A7%E6%97%A5-%E4%B8%BB%E8%A6%96%E8%A6%BA.jpg"
+      },
+      {
+        month: 5,
+        name: "屏東黑鮪魚文化觀光季",
+        description: "每年5月開始，東港鎮舉辦黑鮪魚文化觀光季，推廣在地漁業文化。",
+        link: "https://www.dbnsa.gov.tw/Festival-Content.aspx?Lang=1&SNo=03001989",
+        image: "https://s3-ap-northeast-1.amazonaws.com/www.myonly.com.tw/wp-content/uploads/2018/04/20160015/18465ad99e0e0b43f.jpg"
+      },
+      {
+        month: 6,
+        name: "屏東「超遊感」 REAL PINGTUNG",
+        description: "活動期間限定的恆春超輕航機飛行體驗活動限量60名，現場規劃Buffet美食、音樂饗宴，以及具紀念價值的飛行四格紀念照免費體驗，讓來搭乘輕航機的民眾擁有貴賓級待遇，千萬不要錯過這一年一度、全台唯一能在民航機場搭乘超輕航機的盛會。",
+        link: "https://pt3dreal.rezio.shop/zh-TW",
+        image: "https://cindyione.com/wp-content/uploads/2024/07/S__121339920_0_%E8%A6%83%E6%B7%95%E6%B9%AE%E8%8B%A4.jpg"
+      },
+      {
+        month: 7,
+        name: "屏東夏日狂歡祭",
+        description: "結合海洋文化與觀光的活動，包含展覽、表演與市集。",
+        link: "https://cpok.tw/52129",
+        image: "https://img.ltn.com.tw/Upload/news/600/2022/08/01/4011026_1_1.jpg"
+      },
+      {
+        month: 8,
+        name: "屏東巧克力節",
+        description: "巧克力市集匯聚全台30幾家巧克力品牌，多家榮獲過世界賽事獎牌，活動呈現可可產業的多元面貌，還有巧克力嘉年華遊行等，精彩又適合各年齡層。",
+        link: "https://ezgo.ardswc.gov.tw/zh-tw/event/3936/",
+        image: "https://static.wixstatic.com/media/b8c664_3e409afc5aee432c84bee07c0bc809fe~mv2.jpg/v1/fill/w_2364,h_1774,al_c,q_90/2024%E5%B7%A7%E5%85%8B%E5%8A%9B%E7%AF%80.jpg"
+      },
+      {
+        month: 9,
+        name: "屏東南島文化節",
+        description: "台灣作為南島語族文化發源地，承載豐富歷史，並與全球南島語族相連。自106年起，「收穫那麼多」已連續舉辦八年，成為全國知名的收穫慶典，藉傳統祭儀、競技與青年參與展現山海文化。不僅象徵感恩天地，更展現對自然與生命的敬畏。",
+        link: "https://www.facebook.com/masalutpingtung/?locale=zh_TW",
+        image: "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/09/21/realtime/30576313.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600"
+      },
+      {
+        month: 10,
+        name: "南國漫讀節",
+        description: "在斜坡上的現場熱鬧非凡，舞台上的表演者們穿著傳統服飾，與現代音樂完美結合，營造出獨特的氛圍。",
+        link: "https://www.facebook.com/ptcultural",
+        image: "https://www.thehubnews.net/wp-content/uploads/E5B18FE69DB1E7B8A3E995B7E591A8E698A5E7B1B3E38081E4BD9CE5AEB6E69D8EE69882E38081E78E8BE69687E88FAFEFBC88E59C96E58FB3EFBC89E38081E590B3E88BA5E6AC8AEFBC88E5B7A6EFBC89E585B1E5908CE782BAE58D97E59C8BE6BCABE8AE80E7AF80E68FADE9968BE5BA8FE5B995E38082-1024x683-1.jpg"
+      },
+      {
+        month: 11,
+        name: "斜坡上的藝術節",
+        description: "在斜坡上的現場熱鬧非凡，舞台上的表演者們穿著傳統服飾，與現代音樂完美結合，營造出獨特的氛圍。",
+        link: "https://www.facebook.com/isenasenai/?locale=zh_TW",
+        image: "https://pingtungtimes.com.tw/wp-content/uploads/2023/11/02511c69-494d-46da-a201-1242456a31be.jpg"
+      },
+      {
+        month: 12,
+        name: "屏東聖誕節",
+        description: "聖誕節期間，屏東市區舉辦嘉年華活動，包含燈飾與表演。",
+        link: "https://www.facebook.com/ptcultural",
+        image: "https://cw-image-resizer.cwg.tw/resize/uri/https%3A%2F%2Fcdn-www.cw.com.tw%2Farticle%2F202411%2Farticle-6747c9c35cf9f8.97052190.jpeg/?w=1600&format=webp"
+      }
+    ];
+
+    const slider = document.getElementById('monthSlider');
+    const label = document.getElementById('monthLabel');
+    const card = document.getElementById('eventCard');
+
+    function updateEvent(month) {
+      const event = events.find(e => e.month === month);
+      label.textContent = `${month} 月`;
+      if (event) {
+        card.innerHTML = `
+          <img src="${event.image}" alt="${event.name}" />
+          <h2>${event.name}</h2>
+          <p>${event.description}</p>
+          <a href="${event.link}" target="_blank">查看詳情</a>
+        `;
+      } else {
+        card.innerHTML = `<p>暫無活動資料</p>`;
+      }
+    }
+
+    slider.addEventListener('input', () => {
+      updateEvent(parseInt(slider.value));
+    });
+
+    // 初始化
+    updateEvent(parseInt(slider.value));
+  </script>
+</body>
+</html>
